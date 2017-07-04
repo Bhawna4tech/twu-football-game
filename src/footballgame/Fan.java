@@ -7,8 +7,8 @@ public class Fan {
         this.footBallTeam = footBallTeam;
     }
 
-    public String reactToGoal(String footBallTeam) {
-        if (this.footBallTeam.equals(footBallTeam)) {
+    public String reactToGoal(String scoringTeam) {
+        if (this.footBallTeam.equals(scoringTeam)) {
             return "YAY";
         }
         else {
