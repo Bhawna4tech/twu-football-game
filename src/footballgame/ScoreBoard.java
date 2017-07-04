@@ -1,9 +1,8 @@
 package footballgame;
 
-public class Reporter extends Spectator {
-
+public class ScoreBoard extends Spectator{
     @Override
     public String reactToGoal(String scoringTeam) {
-        return "GOAL by " + scoringTeam;
+        return scoringTeam + " scored";
     }
 }

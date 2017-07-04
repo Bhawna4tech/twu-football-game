@@ -1,6 +1,6 @@
 package footballgame;
 
-public class Fan implements Reactor{
+public class Fan extends Spectator{
     private String footBallTeam;
 
     public Fan(String footBallTeam) {

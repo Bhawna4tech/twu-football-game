@@ -4,32 +4,21 @@ import java.util.ArrayList;
 
 public class FootballGame {
 
-    private ArrayList<Reporter> reporters;
-    private ArrayList<Fan> fans;
+    private ArrayList<Spectator> spectators;
 
-    public FootballGame(ArrayList<Reporter> reporters, ArrayList<Fan> fans) {
-        this.reporters = reporters;
-        this.fans = fans;
+    public FootballGame(ArrayList<Spectator> spectators) {
+        this.spectators = spectators;
     }
 
     public void teamScored(String scoringTeam) {
-        notifyReporters(scoringTeam);
-        notifyFans(scoringTeam);
+        notifySpectators(scoringTeam);
     }
 
-    private void notifyFans(String scoringTeam) {
-        fans.forEach(fan -> fan.reactToGoal(scoringTeam));
+    private void notifySpectators(String scoringTeam) {
+        spectators.forEach(spectator -> spectator.reactToGoal(scoringTeam));
     }
 
-    private void notifyReporters(String scoringTeam) {
-        reporters.forEach(reporter -> reporter.reactToGoal(scoringTeam));
-    }
-
-    public void addReporter(Reporter reporter) {
-        reporters.add(reporter);
-    }
-
-    public void addFan(Fan fan) {
-        fans.add(fan);
+    public void addSpectator(Spectator spectator) {
+        spectators.add(spectator);
     }
 }

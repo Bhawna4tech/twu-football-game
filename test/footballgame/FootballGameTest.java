@@ -3,7 +3,6 @@ package footballgame;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
@@ -11,8 +10,7 @@ import static org.mockito.Mockito.verify;
 
 public class FootballGameTest {
 
-    private ArrayList<Reporter> reporters;
-    private ArrayList<Fan> fans;
+    private ArrayList<Spectator> spectators;
     private FootballGame footballGame;
 
     @Before
@@ -21,46 +19,34 @@ public class FootballGameTest {
         Reporter reporter2 = mock(Reporter.class);
         Fan fan1 = mock(Fan.class);
         Fan fan2 = mock(Fan.class);
-        reporters = new ArrayList<>();
-        reporters.add(reporter1);
-        reporters.add(reporter2);
-        fans = new ArrayList<>();
-        fans.add(fan1);
-        fans.add(fan2);
-        footballGame = new FootballGame(reporters, fans);
+        ScoreBoard scoreBoard = mock(ScoreBoard.class);
+        spectators = new ArrayList<>();
+        spectators.add(reporter1);
+        spectators.add(reporter2);
+        spectators.add(fan1);
+        spectators.add(fan2);
+        spectators.add(scoreBoard);
+
+        footballGame = new FootballGame(spectators);
     }
 
     @Test
     public void reporterShouldReactToGoalScoredByTeamA() {
         footballGame.teamScored("Team A");
-        verify(reporters.get(0)).reactToGoal("Team A");
-        verify(reporters.get(1)).reactToGoal("Team A");
+        for (Spectator spectator : spectators) {
+            verify(spectator).reactToGoal("Team A");
+        }
     }
 
     @Test
     public void reporterShouldReactToGoalScoredByTeamAAfterAddReport() {
-        Reporter reporter = mock(Reporter.class);
-        footballGame.addReporter(reporter);
-        footballGame.teamScored("Team A");
-        verify(reporters.get(0)).reactToGoal("Team A");
-        verify(reporters.get(1)).reactToGoal("Team A");
-        verify(reporters.get(2)).reactToGoal("Team A");
-    }
+        footballGame.addSpectator(mock(Reporter.class));
+        footballGame.addSpectator(mock(Fan.class));
+        footballGame.addSpectator(mock(ScoreBoard.class));
 
-    @Test
-    public void fansShouldReactToGoalScoredByTeamA() {
         footballGame.teamScored("Team A");
-        verify(fans.get(0)).reactToGoal("Team A");
-        verify(fans.get(1)).reactToGoal("Team A");
-    }
-
-    @Test
-    public void fansShouldReactToGoalScoredByTeamAAfterAddFan() {
-        Fan fan = mock(Fan.class);
-        footballGame.addFan(fan);
-        footballGame.teamScored("Team A");
-        verify(fans.get(0)).reactToGoal("Team A");
-        verify(fans.get(1)).reactToGoal("Team A");
-        verify(fans.get(2)).reactToGoal("Team A");
+        for (Spectator spectator : spectators) {
+            verify(spectator).reactToGoal("Team A");
+        }
     }
 }
