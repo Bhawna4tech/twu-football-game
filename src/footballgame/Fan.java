@@ -8,6 +8,11 @@ public class Fan {
     }
 
     public String reactToGoal(String footBallTeam) {
-        return "YAY";
+        if (this.footBallTeam.equals(footBallTeam)) {
+            return "YAY";
+        }
+        else {
+            return "BOO";
+        }
     }
 }
