@@ -1,13 +1,13 @@
 package footballgame;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class FootballGame {
 
-    private List<Reporter> reporters;
-    private List<Fan> fans;
+    private ArrayList<Reporter> reporters;
+    private ArrayList<Fan> fans;
 
-    public FootballGame(List<Reporter> reporters, List<Fan> fans) {
+    public FootballGame(ArrayList<Reporter> reporters, ArrayList<Fan> fans) {
         this.reporters = reporters;
         this.fans = fans;
     }
@@ -23,5 +23,13 @@ public class FootballGame {
 
     private void notifyReporters(String scoringTeam) {
         reporters.forEach(reporter -> reporter.reactToGoal(scoringTeam));
+    }
+
+    public void addReporter(Reporter reporter) {
+        reporters.add(reporter);
+    }
+
+    public void addFan(Fan fan) {
+        fans.add(fan);
     }
 }
